@@ -54,10 +54,10 @@
 		3F09C72F1EC3AFFB004CE87B /* Swipes */ = {
 			isa = PBXGroup;
 			children = (
-				3F09C7301EC3AFFB004CE87B /* AppDelegate.swift */,
-				3F09C7321EC3AFFB004CE87B /* ViewController.swift */,
 				3F09C7341EC3AFFB004CE87B /* Main.storyboard */,
+				3F09C7321EC3AFFB004CE87B /* ViewController.swift */,
 				3F09C7371EC3AFFB004CE87B /* Assets.xcassets */,
+				3F09C7301EC3AFFB004CE87B /* AppDelegate.swift */,
 				3F09C7391EC3AFFB004CE87B /* LaunchScreen.storyboard */,
 				3F09C73C1EC3AFFB004CE87B /* Info.plist */,
 			);
