@@ -16,44 +16,34 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        let vertical = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.reportVerticalSwipe(_:)))
+        vertical.direction = [.up, .down]
+        view.addGestureRecognizer(vertical)
+        
+        let horizontal = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.reportHorizontalSwipe(_:)))
+        horizontal.direction = [.left, .right]
+        view.addGestureRecognizer(horizontal)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    func reportHorizontalSwipe(_ recognizer: UIGestureRecognizer)
     {
-        if let touch = touches.first
+        label.text = "Horizontal swipe detected"
+        DispatchQueue.main.after(when: DispatchTime.now() + Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
         {
-            gestureStartPoint = touch.location(in: self.view)
+            self.label.text = ""
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+    func reportVerticalSwipe(_ recognizer: UIGestureRecognizer)
     {
-        if let touch = touches.first, let gestureStartPoint = self.gestureStartPoint
+        label.text = "Vertical swipe detected"
+        DispatchQueue.main.after(when: DispatchTime.now() + Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
         {
-            let currentPosition = touch.location(in: self.view)
-            
-            let deltaX = fabsf(Float(gestureStartPoint.x - currentPosition.x))
-            let deltaY = fabsf(Float(gestureStartPoint.y - currentPosition.y))
-            
-            if(deltaX >= ViewController.minimumGestureLength && deltaY <= ViewController.maximumVariance)
-            {
-                label.text = "Horizontal swipe detected"
-                DispatchQueue.main.after(when: DispatchTime.now() + Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
-                {
-                    self.label.text = ""
-                }
-            }
-            else if(deltaY >= ViewController.minimumGestureLength && deltaX <= ViewController.maximumVariance)
-            {
-                label.text = "Vertical swipe detected"
-                DispatchQueue.main.after(when: DispatchTime.now() + Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC))
-                {
-                    self.label.text = ""
-                }
-            }
+            self.label.text = ""
         }
     }
-
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
